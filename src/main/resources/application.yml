@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: backgomWineBack
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+      username: backgom
+      password: backgom
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://backgom.iptime.org:33306/backgom
+
+  h2:
+    console:
+      enabled: true
+
+jwt:
+  issuer: human264@gmail.com
+  secret_key: study_springboot
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
+      hibernate: DEBUG
