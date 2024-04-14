@@ -12,9 +12,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
 
   datasource:
     hikari:
@@ -22,15 +23,15 @@ spring:
       username: backgom
       password: backgom
       driver-class-name: org.mariadb.jdbc.Driver
-      jdbc-url: jdbc:mariadb://backgom.iptime.org:33306/backgom
+      jdbc-url: jdbc:mariadb://backgom.iptime.org:43306/backgom
 
   h2:
     console:
       enabled: true
 
 jwt:
-  issuer: human264@gmail.com
-  secret_key: study_springboot
+  issuer: BACKGOM
+  secret_key: BACKGOM_SECRET_KEY
 
 logging:
   level:

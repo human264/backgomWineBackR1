@@ -1,35 +1,46 @@
 package com.backgom.backgomwineback.service;
 
 
-import com.backgom.backgomwineback.domain.User;
+import com.backgom.backgomwineback.domain.UserEntity;
 import com.backgom.backgomwineback.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
-    public User findById(Long userId) {
-        return userRepository
-                .findById(userId)
-                .orElseThrow(
-                        () -> new IllegalArgumentException("Unexpected user")
-                );
-    }
-
-    public User registerNewUserAccount(String email, String rawPassword, List<String> filePath) {
-        if (userRepository.findByEmail(email) != null) {
-            throw new RuntimeException("Email already exists.");
+    public UserEntity create(final UserEntity userEntity) {
+        if (userEntity == null || userEntity.getEmail() == null) {
+            throw new RuntimeException("Invalid Arguments");
         }
-        User newUser = new User(email, passwordEncoder.encode(rawPassword));
-        return userRepository.save(newUser);
+        final String email = userEntity.getEmail();
+
+        if (userRepository.existsByEmail(email)) {
+            log.warn("Email already exists {}", email);
+            throw new RuntimeException("Email already exists");
+        }
+
+        return userRepository.save(userEntity);
     }
+
+    public UserEntity getByCredentials(final String email, final String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
+
+    public UserEntity findById(UUID userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected User"));
+    }
+
+
+
+
+
 }

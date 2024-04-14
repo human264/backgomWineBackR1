@@ -1,9 +1,15 @@
 package com.backgom.backgomwineback.repository;
 
-import com.backgom.backgomwineback.domain.User;
+
+import com.backgom.backgomwineback.domain.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.UUID;
 
-    User findByEmail(String email);
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, UUID> {
+    UserEntity findByEmail(String email);
+    Boolean existsByEmail(String email);
+    UserEntity findByEmailAndPassword(String email, String password);
 }
