@@ -1,9 +1,11 @@
 package com.backgom.backgomwineback.config;
 
 
+import com.backgom.backgomwineback.dto.TokenDto;
 import com.backgom.backgomwineback.properties.JwtProperties;
 import com.backgom.backgomwineback.domain.UserEntity;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +26,20 @@ public class TokenProvider {
 
     private final JwtProperties jwtProperties;
 
-    public String generateToken(UserEntity user, Duration expiredAt) {
+    public TokenDto generateToken(UserEntity user, Duration expiredAt, Duration expiredAtRefreshToken, String joinedUser) {
         Date now = new Date();
-        return makeToken(new Date(now.getTime() + expiredAt.toMillis()), user);
+        return TokenDto.builder()
+                .grantType(joinedUser)
+                .accessToken(
+                        makeAccessToken(
+                                new Date(now.getTime() + expiredAt.toMillis()), user))
+                .refreshToken(
+                        makeRefreshToken(
+                                new Date(now.getTime() + expiredAtRefreshToken.toMillis())))
+                .build();
     }
 
-    private String makeToken(Date expiry, UserEntity user) {
+    private String makeAccessToken(Date expiry, UserEntity user) {
         Date now = new Date();
 
         return Jwts.builder()
@@ -41,11 +51,30 @@ public class TokenProvider {
                 .compact();
     }
 
+
+    private String makeRefreshToken(Date expiry) {
+        Date now = new Date();
+
+        return Jwts.builder()
+                .signWith(SignatureAlgorithm.HS512, jwtProperties.getSecretKey())
+                .setIssuedAt(now)
+                .setExpiration(expiry)
+                .compact();
+
+    }
+
+
+
+
+
     public boolean validToken(String token) {
         try {
-            Jwts.parser()
+            Jws<Claims> claimsJws = Jwts.parser()
                     .setSigningKey(jwtProperties.getSecretKey())
                     .parseClaimsJws(token);
+            if (!claimsJws.getBody().getExpiration().before(new Date())) {
+                return false;
+            }
             return true;
         } catch (Exception e) {
             return false;
@@ -65,6 +94,7 @@ public class TokenProvider {
         Claims claims = getClaims(token);
         return claims.get("id", Long.class);
     }
+
 
     private Claims getClaims(String token) {
         return Jwts.parser()

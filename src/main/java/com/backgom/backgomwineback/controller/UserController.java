@@ -1,14 +1,15 @@
 package com.backgom.backgomwineback.controller;
 
-
 import com.backgom.backgomwineback.config.TokenProvider;
+import com.backgom.backgomwineback.domain.RefreshToken;
 import com.backgom.backgomwineback.domain.UserEntity;
 import com.backgom.backgomwineback.dto.ResponseDTO;
+import com.backgom.backgomwineback.dto.TokenDto;
 import com.backgom.backgomwineback.dto.UserDto;
+import com.backgom.backgomwineback.repository.RefreshTokenRepository;
 import com.backgom.backgomwineback.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ public class UserController {
 
     public final UserService userService;
     private final TokenProvider tokenProvider;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
@@ -55,18 +57,12 @@ public class UserController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticate(@RequestBody UserDto userDto) {
-        UserEntity user = userService.getByCredentials(
-                userDto.getEmail(),
-                userDto.getPassword()
-        );
+        UserEntity user =
+                userService.getByCredentials(userDto.getEmail(),
+                        userDto.getPassword());
 
         if (user != null) {
-            final String token = tokenProvider.generateToken(user, Duration.ofMinutes(30));
-            final UserDto responseUserDTO = UserDto.builder()
-                    .email(user.getEmail())
-                    .id(user.getId())
-                    .token(token)
-                    .build();
+            UserDto responseUserDTO = refreshTokenSave(user);
             return ResponseEntity.ok().body(responseUserDTO);
         } else {
             ResponseDTO responseDTO = ResponseDTO.builder()
@@ -75,5 +71,27 @@ public class UserController {
             return ResponseEntity
                     .badRequest().body(responseDTO);
         }
+    }
+
+    public UserDto refreshTokenSave(UserEntity user) {
+
+        final TokenDto token = tokenProvider
+                .generateToken(user, Duration.ofMinutes(30), Duration.ofDays(1), "user");
+
+        final UserDto responseUserDTO = UserDto.builder()
+                .email(user.getEmail())
+                .id(user.getId())
+                .tokenDto(token)
+                .build();
+
+        if (refreshTokenRepository.existsByUserId(user.getId())) {
+            refreshTokenRepository.deleteByUserId(user.getId());
+        }
+
+        RefreshToken refreshToken = new RefreshToken(user.getId(), token.getRefreshToken());
+
+        refreshTokenRepository.save(refreshToken);
+
+        return responseUserDTO;
     }
 }
