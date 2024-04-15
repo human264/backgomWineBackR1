@@ -36,7 +36,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception { //  초기화 단계에서 HttpSecurity 객체가 실제 설정한 필터를 생성
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //  초기화 단계에서 HttpSecurity 객체가 실제 설정한 필터를 생성
         http
                 .csrf(csrf -> {
                     csrf.ignoringRequestMatchers("/auth/**");

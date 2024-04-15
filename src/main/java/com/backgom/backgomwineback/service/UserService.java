@@ -6,6 +6,7 @@ import com.backgom.backgomwineback.domain.LogInUser;
 import com.backgom.backgomwineback.domain.RefreshToken;
 import com.backgom.backgomwineback.domain.UserEntity;
 import com.backgom.backgomwineback.dto.TokenDto;
+import com.backgom.backgomwineback.dto.UserDto;
 import com.backgom.backgomwineback.repository.RefreshTokenRepository;
 import com.backgom.backgomwineback.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final RefreshTokenService refreshTokenService;
+    private final RefreshTokenRepository refreshTokenRepository;
     private final TokenProvider tokenProvider;
 
     public UserEntity create(final UserEntity userEntity) {
@@ -70,7 +72,27 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public UserDto refreshTokenSave(UserEntity user) {
 
+        final TokenDto token = tokenProvider
+                .generateToken(user, Duration.ofMinutes(30), Duration.ofDays(1), "user");
+
+        final UserDto responseUserDTO = UserDto.builder()
+                .email(user.getEmail())
+                .id(user.getId())
+                .tokenDto(token)
+                .build();
+
+        if (refreshTokenRepository.existsByUserId(user.getId())) {
+            refreshTokenRepository.deleteByUserId(user.getId());
+        }
+
+        RefreshToken refreshToken = new RefreshToken(user.getId(), token.getRefreshToken());
+
+        refreshTokenRepository.save(refreshToken);
+
+        return responseUserDTO;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
