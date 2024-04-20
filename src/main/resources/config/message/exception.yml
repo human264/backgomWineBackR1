@@ -1,0 +1,613 @@
+success:
+  200ok:
+    code: 20000000
+    desc: 200ok
+    type: HAS-200
+    status: 200
+  204ok:
+    code: 20000000
+    desc: 204ok
+    type: HAS-200
+    status: 204
+  nodata:
+    code: 20000604
+    desc: nodata
+    type: HAS-200
+    status: nodata
+  availableid:
+    code: 20000000
+    desc: availableid
+    type: HAS-200
+    status: 200
+  disabledid:
+    code: 20000203
+    desc: disabledid
+    type: HAS-203
+    status: 203
+  available:
+    code: 20000000
+    desc: available
+    type: HAS-200
+    status: 200
+  disabled:
+    code: 20000203
+    desc: disabled
+    type: HAS-203
+    status: 203
+exception:
+  202ok:
+    code: 20000200
+    desc: 202ok
+    type: HAS-200
+    status: 200
+  notdefine:
+    code: 40000600
+    desc: notdefine
+    type: HAS-500
+    status: 645
+  invaliduser:
+    code: 40000600
+    desc: invaliduser
+    type: HAS-500
+    status: 645
+  org.springframework.jdbc:
+    code: 40000610
+    desc: org.springframework.jdbc
+    type: null
+    status: 645
+  invalid:
+    code: 31000601
+    desc: invalid
+    type: HAS-500
+    status: 398
+  empty_key:
+    code: 31000601
+    desc: empty_key
+    type: HAS-500
+    status: 398
+  empty_value:
+    code: 31000601
+    desc: empty_value
+    type: HAS-500
+    status: 398
+  too_long:
+    code: 31000602
+    desc: too_long
+    type: HAS-500
+    status: 398
+  too_short:
+    code: 31000602
+    desc: too_short
+    type: HAS-500
+    status: 398
+  wrong_length:
+    code: 31000602
+    desc: wrong_length
+    type: HAS-500
+    status: 398
+  not_a_number:
+    code: 31000602
+    desc: not_a_number
+    type: HAS-500
+    status: 398
+  white_space:
+    code: 31000602
+    desc: white_space
+    type: HAS-500
+    status: 398
+  greater_than:
+    code: 31000602
+    desc: greater_than
+    type: HAS-500
+    status: 398
+  greater_than_or_equal_to:
+    code: 31000602
+    desc: greater_than_or_equal_to
+    type: HAS-500
+    status: 398
+  less_than:
+    code: 31000602
+    desc: less_than
+    type: HAS-500
+    status: 398
+  less_than_or_equal_to:
+    code: 31000602
+    desc: less_than_or_equal_to
+    type: HAS-500
+    status: 398
+  abnormal_format:
+    code: 30000602
+    desc: abnormal_format
+    type: HAS-500
+    status: 398
+  accept:
+    code: 30000602
+    desc: accept
+    type: HAS-500
+    status: 398
+  reject:
+    code: 30000602
+    desc: reject
+    type: HAS-500
+    status: 398
+  not_a_parameter:
+    code: 30000401
+    desc: ' 전송된 파라미터 값이 없습니다'
+    type: HAS-500
+    status: 398
+  not_a_httpheader:
+    code: 31000603
+    desc: not_a_httpheader
+    type: HAS-500
+    status: 398
+  not_a_httpheadervalue:
+    code: 31000604
+    desc: not_a_httpheadervalue
+    type: HAS-500
+    status: 398
+  too_long_httpheadervalue:
+    code: 31000604
+    desc: too_long_httpheadervalue
+    type: HAS-500
+    status: 398
+  too_short_httpheadervalue:
+    code: 31000604
+    desc: too_short_httpheadervalue
+    type: HAS-500
+    status: 398
+  wrong_length_httpheadervalue:
+    code: 31000604
+    desc: wrong_length_httpheadervalue
+    type: HAS-500
+    status: 398
+  not_a_number_httpheadervalue:
+    code: 31000604
+    desc: not_a_number_httpheadervalue
+    type: HAS-500
+    status: 398
+  white_space_httpheadervalue:
+    code: 31000604
+    desc: white_space_httpheadervalue
+    type: HAS-500
+    status: 398
+  greater_than_httpheadervalue:
+    code: 31000604
+    desc: greater_than_httpheadervalue
+    type: HAS-500
+    status: 398
+  less_than_httpheadervalue:
+    code: 31000604
+    desc: less_than_httpheadervalue
+    type: HAS-500
+    status: 398
+  abnormal_format_httpheadervalue:
+    code: 30000604
+    desc: ' {0} 값은 정상적인 포멧( {1} )이 아닙니다.'
+    type: HAS-500
+    status: 398
+  accept_httpheadervalue:
+    code: 30000604
+    desc: accept_httpheadervalue
+    type: HAS-500
+    status: 398
+  reject_httpheadervalue:
+    code: 30000604
+    desc: reject_httpheadervalue
+    type: HAS-500
+    status: 398
+  empty_httpheadervalue:
+    code: 31000604
+    desc: empty_httpheadervalue
+    type: HAS-500
+    status: 398
+  invalid_data:
+    code: 31000601
+    desc: invalid_data
+    type: HAS-500
+    status: 398
+  invalid_xss:
+    code: 30100200
+    desc: invalid_xss
+    type: HAS-500
+    status: 398
+  special_char:
+    code: 30100200
+    desc: special_char
+    type: HAS-500
+    status: 398
+  ems_not_a_httpheader:
+    code: 31000603
+    desc: ems_not_a_httpheader
+    type: HAS-500
+    status: 645
+  ems_not_a_httpheadervalue:
+    code: 31000604
+    desc: ems_not_a_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_too_long_httpheadervalue:
+    code: 31000604
+    desc: ems_too_long_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_too_short_httpheadervalue:
+    code: 31000604
+    desc: ems_too_short_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_wrong_length_httpheadervalue:
+    code: 31000604
+    desc: ems_wrong_length_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_not_a_number_httpheadervalue:
+    code: 31000604
+    desc: ems_not_a_number_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_white_space_httpheadervalue:
+    code: 31000604
+    desc: ems_white_space_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_greater_than_httpheadervalue:
+    code: 31000604
+    desc: ems_greater_than_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_less_than_httpheadervalue:
+    code: 31000604
+    desc: ems_less_than_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_abnormal_format_httpheadervalue:
+    code: 30000604
+    desc: ems_abnormal_format_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_accept_httpheadervalue:
+    code: 30000604
+    desc: ems_accept_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_reject_httpheadervalue:
+    code: 30000604
+    desc: ems_reject_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_empty_httpheadervalue:
+    code: 31000604
+    desc: ems_empty_httpheadervalue
+    type: HAS-500
+    status: 645
+  ems_invalid_data:
+    code: 31000602
+    desc: ems_invalid_data
+    type: HAS-500
+    status: 645
+  ems_special_char:
+    code: 30100200
+    desc: ems_special_char
+    type: HAS-500
+    status: 645
+  ems_not_a_parameter:
+    code: 31000601
+    desc: ems_not_a_parameter
+    type: HAS-500
+    status: 645
+  ems_empty_key:
+    code: 31000601
+    desc: ems_empty_key
+    type: HAS-500
+    status: 645
+  ems_empty_value:
+    code: 31000601
+    desc: ems_empty_value
+    type: HAS-500
+    status: 645
+  database:
+    code: 40000610
+    desc: database
+    type: ORA-XXXXX
+    status: 498
+  config_file_not_found:
+    code: 40000600
+    desc: config_file_not_found
+    type: HAS-500
+    status: 498
+  config_file_empty_key:
+    code: 40000600
+    desc: config_file_empty_key
+    type: HAS-500
+    status: 498
+  config_file_invalid_value:
+    code: 40000600
+    desc: config_file_invalid_value
+    type: HAS-500
+    status: 498
+  java.io.FileNotFoundException:
+    code: 40000600
+    desc: java.io.FileNotFoundException
+    type: HAS-500
+    status: 498
+  java.io.IOException:
+    code: 40000600
+    desc: java.io.IOException
+    type: HAS-500
+    status: 498
+  java.sql.SQLException:
+    code: 40000610
+    desc: java.sql.SQLException
+    type: ORA-XXXXX
+    status: 498
+  org.springframework.dao.DataAccessException:
+    code: 40000610
+    desc: org.springframework.dao.DataAccessException
+    type: null
+    status: 498
+  org.apache.ibatis.javassist.NotFoundException:
+    code: 30000404
+    desc: org.apache.ibatis.javassist.NotFoundException
+    type: HAS-500
+    status: 498
+  org.apache.http.conn.ConnectTimeoutException:
+    code: 52000620
+    desc: org.apache.http.conn.ConnectTimeoutException
+    type: PAS-TIMEOUT
+    status: 900
+  java.net.SocketTimeoutException:
+    code: 52000620
+    desc: java.net.SocketTimeoutException
+    type: PAS-TIMEOUT
+    status: 900
+  java.net.ConnectException:
+    code: 59000900
+    desc: java.net.ConnectException
+    type: PAS-900
+    status: 900
+  org.springframework.jdbc.BadSqlGrammarException:
+    code: 40000610
+    desc: org.springframework.jdbc.BadSqlGrammarException
+    type: ORA-XXXX
+    status: 997
+  org.springframework.web.HttpMediaTypeNotSupportedException:
+    code: 31000603
+    desc: org.springframework.web.HttpMediaTypeNotSupportedException
+    type: HAS-500
+    status: 398
+  org.quartz.JobExecutionException:
+    code: 40000800
+    desc: org.quartz.JobExecutionException
+    type: HAS-500
+    status: 398
+  java.lang.NullPointerException:
+    code: 40000800
+    desc: java.lang.NullPointerException
+    type: HAS-500
+    status: 645
+  java.lang.NumberFormatException:
+    code: 40000801
+    desc: java.lang.NumberFormatException
+    type: HAS-500
+    status: 645
+  org.springframework.http.converter.HttpMessageNotReadableException:
+    code: 40000802
+    desc: org.springframework.http.converter.HttpMessageNotReadableException
+    type: HAS-500
+    status: 398
+  com.fasterxml.jackson.core.io.JsonEOFException:
+    code: 40000802
+    desc: com.fasterxml.jackson.core.io.JsonEOFException
+    type: HAS-500
+    status: 398
+  com.fasterxml.jackson.core.JsonParseException:
+    code: 40000802
+    desc: com.fasterxml.jackson.core.JsonParseException
+    type: HAS-500
+    status: 398
+  com.fasterxml.jackson.databind.JsonMappingException:
+    code: 40000802
+    desc: com.fasterxml.jackson.databind.JsonMappingException
+    type: HAS-500
+    status: 398
+  javax.script.ScriptException:
+    code: 40000802
+    desc: javax.script.ScriptException
+    type: HAS-500
+    status: 398
+  java.lang.NoSuchMethodException:
+    code: 40000802
+    desc: java.lang.NoSuchMethodException
+    type: HAS-500
+    status: 398
+  com.fasterxml.jackson.databind.exc.MismatchedInputException:
+    code: 40000802
+    desc: com.fasterxml.jackson.databind.exc.MismatchedInputException
+    type: HAS-500
+    status: 398
+  org.springframework.web.HttpRequestMethodNotSupportedException:
+    code: 40000802
+    desc: org.springframework.web.HttpRequestMethodNotSupportedException
+    type: HAS-500
+    status: 398
+  java.lang.IllegalArgumentException:
+    code: 40000802
+    desc: not_token
+    type: HAS-500
+    status: 398
+  org.springframework.data.redis.RedisConnectionFailureException:
+    code: 40000111
+    desc: org.springframework.data.redis.RedisConnectionFailureException
+    type: HAS-111
+    status: 398
+  org.springframework.security.core.AuthenticationException:
+    code: 40000802
+    desc: org.springframework.security.core.AuthenticationException
+    type: HAS-500
+    status: 398
+  org.springframework.web.servlet.NoHandlerFoundException:
+    code: 40400001
+    desc: org.springframework.web.servlet.NoHandlerFoundException
+    type: HAS-404
+    status: 404
+  AccessDenied:
+    code: 40100001
+    desc: AccessDenied
+    type: HAS-401
+    status: 401
+  IOException:
+    code: 40100001
+    desc: IOException
+    type: HAS-401
+    status: 401
+  fileSizeExceed:
+    code: 40000111
+    desc: fileSizeExceed
+    type: HAS-111
+    status: 398
+  noUploadFile:
+    code: 40000111
+    desc: noUploadFile
+    type: HAS-111
+    status: 398
+  fileUploadFail:
+    code: 40000111
+    desc: fileUploadFail
+    type: HAS-111
+    status: 398
+  fileNotFound:
+    code: 40000111
+    desc: fileNotFound
+    type: HAS-111
+    status: 398
+  fileDownloadFail:
+    code: 40000111
+    desc: fileDownloadFail
+    type: HAS-111
+    status: 398
+  fileTypeFail:
+    code: 40000111
+    desc: fileTypeFail
+    type: HAS-111
+    status: 398
+  org.apache.ibatis.binding.BindingException:
+    code: 40000112
+    desc: BindingException
+    type: HAS-111
+    status: 398
+  loginfail:
+    code: 40000111
+    desc: login_fail
+    type: HAS-111
+    status: 398
+  kepwareInitFail:
+    code: 40000211
+    desc: kepware_init_fail
+    type: HAS-111
+    status: 398
+  influxdbReadFail:
+    code: 40000311
+    desc: influxdb_read_fail
+    type: HAS-111
+    status: 398
+  dataParsingFail:
+    code: 40000411
+    desc: data_parsing_fail
+    type: HAS-111
+    status: 398
+  com.hhi.hiway.common.jwt.InvalidJwtAuthenticationException:
+    code: 40000412
+    desc: invalid_jwt_token
+    type: HAS-111
+    status: 398
+  org.springframework.security.access.AccessDeniedException:
+    code: 40000412
+    desc: invalid_jwt_token
+    type: HAS-111
+    status: 398
+  org.springframework.validation.BindException:
+    code: 31000601
+    desc:
+    type: HAS-500
+    status: 398
+  org.springframework.web.bind.MethodArgumentNotValidException:
+    code: 31000601
+    desc:
+    type: HAS-500
+    status: 398
+  check_userid_alreadyexist:
+    code: 31000601
+    desc: check_userid_alreadyexist
+    type: HAS-500
+    status: 398
+  initpassword:
+    code: 40000413
+    desc: initpassword
+    type: HAS-400
+    status: 398
+  changepassword:
+    code: 40000414
+    desc: changepassword
+    type: HAS-400
+    status: 398
+  ssologin:
+    code: 40000415
+    desc: ssologin
+    type: HAS-400
+    status: 398
+  nopermission:
+    code: 40300001
+    desc: nopermission
+    type: HAS-403
+    status: 403
+  nomatchingip:
+    code: 40300416
+    desc: nomatchingip
+    type: HAS-400
+    status: 398
+  not_check_auth_number:
+    code: 40300002
+    desc: not_check_auth_number
+    type: HAS-403
+    status: 403
+  not_a_hptel:
+    code: 40300003
+    desc: not_a_hptel
+    type: HAS-403
+    status: 403
+  dev_conv_no_metakeyfield:
+    code: 40000610
+    desc: dev_conv_no_metakeyfield
+    type: HAS-500
+    status: 498
+  dev_conv_no_targetkeyfield:
+    code: 40000610
+    desc: dev_conv_no_targetkeyfield
+    type: HAS-500
+    status: 498
+  dev_conv_db_error:
+    code: 40000610
+    desc: dev_conv_db_error
+    type: HAS-500
+    status: 498
+  sso_fail:
+    code: 40000001
+    desc: sso_fail
+    type: HAS-400
+    status: 400
+  sso_unavailable:
+    code: 40000002
+    desc: sso_unavailable
+    type: HAS-400
+    status: 400
+  userid_decrypt_fail:
+    code: 50000001
+    desc: userid_decrypt_fail
+    type: HAS-500
+    status: 500
+  sso_api_call:
+    code: 50300001
+    desc: sso_api_call
+    type: HAS-503
+    status: 503
+

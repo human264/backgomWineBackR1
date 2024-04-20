@@ -1,0 +1,7 @@
+tbCmmnCd:
+  cdSeq: 'CD SEQ'
+  cdId: 'CD ID'
+  cdNm: 'CD NAME'
+  parentCdId: 'PARENT ID'
+  firstCdId: 'FIRST ID'
+    

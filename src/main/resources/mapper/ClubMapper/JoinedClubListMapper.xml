@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backgom.backgomwineback.repository.JoinedClubListRepository">
+
+    <resultMap id="BaseResultMap" type="Joinedclublist">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <id property="email" column="email" jdbcType="VARCHAR"/>
+            <id property="clubName" column="clubName" jdbcType="VARCHAR"/>
+            <id property="role" column="role" jdbcType="VARCHAR"/>
+            <result property="joinConfirm" column="joinConfirm" jdbcType="INTEGER"/>
+            <result property="created_at" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="updated_at" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <select id="getTheJoinedClubList" resultType="JoinedClubList">
+        SELECT * FROM JoinedClubList j WHERE j.email = #{email}
+    </select>
+
+
+    <select id="getTheJoinedClubID" resultType="java.lang.Long">
+        SELECT j.joinedClubId FROM JoinedClubList j WHERE j.email = #{email}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.backgom.backgomwineback.repository.UserRepository">
+
+    <insert id="save" parameterType="Users">
+        INSERT INTO user_entity (id, auth_provider, email, password, phone_number, role)
+        VALUES (#{param.id}, #{param.authProvider}, #{param.email}, #{param.password}, #{param.phoneNumber}, #{param.role})
+    </insert>
+
+    <insert id="savePicturesInUserDetail" parameterType="java.lang.String">
+        INSERT INTO user_details (email, fileLocation)
+        VALUES (#{email}, #{targetLocationPath})
+    </insert>
+
+    <select id="findByEmail" parameterType="java.lang.String" resultType="Users">
+        SELECT id, auth_provider, email, password, phone_number, role
+        FROM user_entity u WHERE u.email = #{param.email}
+    </select>
+
+    <select id="existsByEmail" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+        FROM user_entity
+        WHERE email = #{email}
+    </select>
+    <select id="findByEmailAndPassword" parameterType="map" resultType="Users">
+        SELECT *
+        FROM user_entity
+        WHERE email = #{email}
+          AND password = #{password}
+    </select>
+    <select id="findById" parameterType="java.util.UUID" resultType="Users">
+        SELECT *
+        FROM user_entity
+        WHERE id = #{userId}
+    </select>
+    <select id="findUserEntityById" parameterType="java.util.UUID" resultType="Users">
+        SELECT *
+        FROM user_entity
+        WHERE id = #{userId}
+    </select>
+
+
+    <select id="getUserPictures" resultType="java.lang.String">
+        SELECT u.fileLocation
+        FROM user_details u
+        where email = #{email};
+    </select>
+</mapper>

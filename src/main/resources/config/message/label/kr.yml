@@ -1,0 +1,7 @@
+tbCmmnCd:
+  cdSeq: '코드순번'
+  cdId: '코드아이디'
+  cdNm: '코드명'
+  parentCdId: '부모코드'
+  firstCdId: '최상위코드'
+    
