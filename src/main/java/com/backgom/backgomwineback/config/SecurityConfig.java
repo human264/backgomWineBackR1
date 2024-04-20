@@ -40,8 +40,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> {
                     csrf.ignoringRequestMatchers("/auth/**");
-//                    csrf.ignoringRequestMatchers("/auth/signin");
+                    csrf.disable();
                 })
+
                 .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -50,7 +51,11 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth -> {
                     auth
-                            .requestMatchers("/auth/signup", "/auth/signin")
+                            .requestMatchers(
+                                    "/auth/signup",
+                                    "/auth/signin",
+                                    "/auth/uploadUserPicture",
+                                    "/WineCommunity/myClubList")
                             .permitAll()
                             .anyRequest()
                             .authenticated()
