@@ -1,15 +1,26 @@
 package com.backgom.backgomwineback.repository;
 
 
-import com.backgom.backgomwineback.domain.UserEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.backgom.backgomwineback.domain.User.UserEntity;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface UserRepository extends JpaRepository<UserEntity, UUID> {
+@Mapper
+public interface UserRepository {
     UserEntity findByEmail(String email);
     Boolean existsByEmail(String email);
     UserEntity findByEmailAndPassword(String email, String password);
+    int save(@Param("param") UserEntity userEntity);
+    Optional<UserEntity> findById( UUID userId);
+    Optional<UserEntity> findUserEntityById(UUID userId);
+
+    void savePicturesInUserDetail(
+            @Param("email") String email,
+            @Param("targetLocationPath") String targetLocationPath);
+
+    List<String> getUserPictures(String email);
 }

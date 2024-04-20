@@ -3,7 +3,7 @@ package com.backgom.backgomwineback.config;
 
 import com.backgom.backgomwineback.dto.TokenDto;
 import com.backgom.backgomwineback.properties.JwtProperties;
-import com.backgom.backgomwineback.domain.UserEntity;
+import com.backgom.backgomwineback.domain.User.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -87,7 +87,6 @@ public class TokenProvider {
 
         return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(claims.getSubject(),
                 "", authorities), token, authorities);
-
     }
 
     public Long getUserId(String token) {

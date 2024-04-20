@@ -1,7 +1,7 @@
 package com.backgom.backgomwineback.service;
 
 
-import com.backgom.backgomwineback.domain.RefreshToken;
+import com.backgom.backgomwineback.domain.User.RefreshToken;
 import com.backgom.backgomwineback.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,19 +1,16 @@
 package com.backgom.backgomwineback.controller;
 
-import com.backgom.backgomwineback.config.TokenProvider;
-import com.backgom.backgomwineback.domain.RefreshToken;
-import com.backgom.backgomwineback.domain.UserEntity;
+import com.backgom.backgomwineback.domain.User.UserEntity;
 import com.backgom.backgomwineback.dto.ResponseDTO;
-import com.backgom.backgomwineback.dto.TokenDto;
 import com.backgom.backgomwineback.dto.UserDto;
-import com.backgom.backgomwineback.repository.RefreshTokenRepository;
 import com.backgom.backgomwineback.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.Duration;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -21,9 +18,8 @@ import java.time.Duration;
 @RequestMapping("/auth")
 public class UserController {
 
+
     public final UserService userService;
-    private final TokenProvider tokenProvider;
-    private final RefreshTokenRepository refreshTokenRepository;
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
@@ -31,12 +27,21 @@ public class UserController {
             if (userDto == null || userDto.getPassword() == null) {
                 throw new RuntimeException("Invalid Password value");
             }
+
+            UUID uuid = UUID.randomUUID();
             UserEntity user = UserEntity.builder()
+                    .id(uuid)
                     .email(userDto.getEmail())
                     .password(userDto.getPassword())
                     .build();
 
-            UserEntity registeredUser = userService.create(user);
+            int isUserCreated = userService.create(user);
+
+            if (isUserCreated == 0) {
+                throw new RuntimeException("User creation failed");
+            }
+
+            UserEntity registeredUser = userService.findById(uuid);
 
             UserDto responseuserDTO = UserDto.builder()
                     .id(registeredUser.getId())
@@ -60,7 +65,6 @@ public class UserController {
         UserEntity user = userService.getByCredentials(userDto.getEmail(), userDto.getPassword());
         if (user != null) {
             UserDto responseUserDTO = userService.refreshTokenSave(user);
-
             return ResponseEntity.ok().body(responseUserDTO);
         } else {
             ResponseDTO responseDTO = ResponseDTO.builder()
@@ -69,6 +73,12 @@ public class UserController {
             return ResponseEntity
                     .badRequest().body(responseDTO);
         }
+    }
+
+    @PostMapping("/uploadUserPicture")
+    public void registerPictures(@RequestParam("file") MultipartFile[] files,
+                                 @RequestParam("email") String email) {
+        userService.registerPictures(files, email);
     }
 
 

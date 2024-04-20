@@ -7,23 +7,17 @@ spring:
       max-file-size: 2MB
       max-request-size: 2MB
 
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: update
 
   datasource:
     hikari:
-      maximum-pool-size: 4
       username: backgom
       password: backgom
       driver-class-name: org.mariadb.jdbc.Driver
       jdbc-url: jdbc:mariadb://backgom.iptime.org:43306/backgom
+      connection-timeout: 5000
+      validation-timeout: 1000
+      maximum-pool-size: 30
+      minimum-idle: 5
 
   h2:
     console:
@@ -34,7 +28,30 @@ jwt:
   secret_key: BACKGOM_SECRET_KEY
 
 logging:
+  config: classpath:config/logs/logback-spring.xml
   level:
-    org:
-      springframework: DEBUG
-      hibernate: DEBUG
+    root: INFO ##
+    org.springframework: INFO
+    org.springframework.web: INFO
+    org.springframework.boot.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    com.zaxxer.hikari: INFO
+    org.h2.server.web: DEBUG
+    io.netty: INFO
+    com.backgom: DEBUG
+    org.springframework.session.data.redis: off
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:/mapper/**/*.xml
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+imagePath:
+  clubMain: /Users/backgom-air/backgomwine/club
+  userPicture: /Users/backgom-air/backgomwine/user
