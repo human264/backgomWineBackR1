@@ -3,6 +3,7 @@ package com.backgom.backgomwineback.service;
 
 import com.backgom.backgomwineback.domain.Club.ClubList;
 import com.backgom.backgomwineback.domain.Club.JoinedClubList;
+import com.backgom.backgomwineback.dto.club.ClubListDto;
 import com.backgom.backgomwineback.dto.club.JoinedClubListDto;
 import com.backgom.backgomwineback.repository.ClubListRepository;
 import com.backgom.backgomwineback.repository.JoinedClubListRepository;
@@ -44,4 +45,16 @@ public class WineCommunityService {
     }
 
 
+    public List<ClubListDto> getClubList(ClubListDto clubListDto) {
+
+        List<ClubListDto> clubListDtos = new ArrayList<>();
+
+        List<ClubList> clubLists = clubListRepository.getClubLists(clubListDto);
+
+        clubLists.forEach(
+                it -> clubListDtos.add(ClubListDto.entityToDto(it))
+        );
+
+        return clubListDtos;
+    }
 }

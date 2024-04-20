@@ -14,5 +14,38 @@
         </where>
     </select>
 
+    <select id="getClubLists" resultType="ClubList">
+        SELECT * FROM clubList
+        <where>
+            <if test="id != null and id != ''">
+                id = #{dto.id}
+            </if>
+            <if test="clubSubject != null and clubSubject != ''">
+                clubSubject = #{dto.clubSubject}
+            </if>
+            <if test="clubSubject != null and clubSubject != ''">
+                clubSubject = #{dto.bungae}
+            </if>
+            <if test="clubSubject != null and clubSubject != ''">
+                clubSubject = #{dto.jungmo}
+            </if>
+            <if test="clubSubject != null and clubSubject != ''">
+                clubSubject = #{dto.clubSubject}
+            </if>
+            <if test="clubSubject != null and clubSubject != ''">
+                clubSubject = #{dto.clubSubject}
+            </if>
+            <if test="clubSubject != null and clubSubject != ''">
+                clubSubject = #{dto.clubSubject}
+            </if>
+            <if test="clubSubject != null and clubSubject != ''">
+                clubSubject = #{dto.clubSubject}
+            </if>
+            <if test="clubSubject != null and clubSubject != ''">
+                clubSubject = #{dto.clubSubject}
+            </if>
+        </where>
+    </select>
+
 
 </mapper>
