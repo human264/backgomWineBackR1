@@ -14,4 +14,7 @@ public interface ClubListRepository {
 
     List<ClubList> getClubListByClubId(List<Long> clubId);
     List<ClubList> getClubLists(@Param("dto") ClubListDto clubListDto);
+
+    int createClub(@Param("dto") ClubListDto build);
+
 }

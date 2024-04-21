@@ -5,7 +5,8 @@ spring:
     multipart:
       enabled: true
       max-file-size: 2MB
-      max-request-size: 2MB
+      max-request-size: 10MB
+
 
 
   datasource:
@@ -51,9 +52,10 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+
 #    context-path: /api
 
 imagePath:
-  clubMain: D:/backgomwine/club
-  userPicture: D:/backgomwine/user
+  clubMain: /Users/backgom-air/backgomwine/club
+  userPicture: /Users/backgom-air/backgomwine/user
 

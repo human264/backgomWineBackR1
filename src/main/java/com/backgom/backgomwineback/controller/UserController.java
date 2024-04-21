@@ -1,6 +1,7 @@
 package com.backgom.backgomwineback.controller;
 
 import com.backgom.backgomwineback.domain.User.UserEntity;
+import com.backgom.backgomwineback.dto.JoinInDto;
 import com.backgom.backgomwineback.dto.ResponseDTO;
 import com.backgom.backgomwineback.dto.UserDto;
 import com.backgom.backgomwineback.service.UserService;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -96,7 +98,7 @@ public class UserController {
 
         String fileName = userService.getUserBasePicture(authentication.getName());
 
-        try{
+        try {
             Path file = Paths.get(fileName);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
@@ -112,5 +114,36 @@ public class UserController {
         }
     }
 
+    @PostMapping("/joinInWithOutPhoto")
+    public ResponseEntity<?> postJoinInExceptPicture(@RequestBody JoinInDto joinInDto
+    ) {
+        System.out.println("Received data: " + joinInDto.toString());
+        // 파일과 데이터 처리 로직
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/joinIn")
+    public ResponseEntity<?> postJoinInExceptPicture1(
+            @RequestParam("files") MultipartFile[] files) {
+        System.out.println(files.length);
+        for (MultipartFile file : files) {
+            System.out.println(file.getName());
+            System.out.println(file.getOriginalFilename());
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/uploadImageUrls")
+    public ResponseEntity<?> postUploadImageUrls(
+            @RequestParam("files") MultipartFile[] files,
+            @RequestParam("email") String email) {
+        System.out.println(files);
+        for (int i = 0; i < files.length; i++) {
+            System.out.println(files[i].getOriginalFilename());
+        }
+        System.out.println(email);
+        return ResponseEntity.ok().build();
+    }
 
 }

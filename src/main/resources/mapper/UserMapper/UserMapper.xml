@@ -4,15 +4,15 @@
 
 <mapper namespace="com.backgom.backgomwineback.repository.UserRepository">
 
-    <insert id="save" parameterType="Users">
+    <insert id="save" parameterType="Users"><![CDATA[
         INSERT INTO user_entity (id, auth_provider, email, password, phone_number, role)
         VALUES (#{param.id}, #{param.authProvider}, #{param.email}, #{param.password}, #{param.phoneNumber}, #{param.role})
-    </insert>
+    ]]></insert>
 
-    <insert id="savePicturesInUserDetail" parameterType="java.lang.String">
-        INSERT INTO user_details (email, fileLocation)
+    <insert id="savePicturesInUserDetail" parameterType="java.lang.String"><![CDATA[
+        INSERT INTO user_detail (email, fileLocation)
         VALUES (#{email}, #{targetLocationPath})
-    </insert>
+    ]]></insert>
 
     <select id="findByEmail" parameterType="java.lang.String" resultType="Users">
         SELECT id, auth_provider, email, password, phone_number, role

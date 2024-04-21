@@ -36,6 +36,7 @@ public class WineCommunityService {
 
         return clubLists.stream().map(it -> JoinedClubListDto
                 .builder()
+                .id(it.getId())
                 .clubSubject(it.getClubsubject())
                 .clubMemberNo(it.getMemberno())
                 .isTheJungMoExists(it.isJungmoExists())
@@ -51,10 +52,12 @@ public class WineCommunityService {
 
         List<ClubList> clubLists = clubListRepository.getClubLists(clubListDto);
 
-        clubLists.forEach(
-                it -> clubListDtos.add(ClubListDto.entityToDto(it))
-        );
+        clubLists.forEach(it -> clubListDtos.add(ClubListDto.entityToDto(it)));
 
         return clubListDtos;
+    }
+
+    public int createClub(ClubListDto build) {
+        return clubListRepository.createClub(build);
     }
 }

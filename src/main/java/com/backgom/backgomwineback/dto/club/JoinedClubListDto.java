@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class JoinedClubListDto {
+    private Long id;
     private String clubSubject;
     private int clubMemberNo;
     private boolean isTheJungMoExists;
