@@ -13,13 +13,13 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/WineCommunity")
+@RequestMapping("/api/WineCommunity")
 public class WineCommunityController {
 
     public final WineCommunityService wineCommunityService;
 
-    @GetMapping("/myClubList/{email}")
-    public ResponseEntity<?> getMyCommunityList(@PathVariable("email") String email) {
+    @GetMapping("/myJoinedClubList")
+    public ResponseEntity<?> getMyCommunityList(@RequestParam("email") String email) {
         List<JoinedClubListDto> theJoinedClubList = wineCommunityService
                 .getTheJoinedClubList(email);
         return ResponseEntity.ok().body(theJoinedClubList);

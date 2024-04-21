@@ -23,4 +23,6 @@ public interface UserRepository {
             @Param("targetLocationPath") String targetLocationPath);
 
     List<String> getUserPictures(String email);
+
+    String getUserBasePicture(String email);
 }

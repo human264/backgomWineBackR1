@@ -51,8 +51,9 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+#    context-path: /api
 
 imagePath:
-  clubMain: /Users/backgom-air/backgomwine/club
-  userPicture: /Users/backgom-air/backgomwine/user
+  clubMain: D:/backgomwine/club
+  userPicture: D:/backgomwine/user
 

@@ -181,4 +181,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public String getUserBasePicture(String email) {
+        return userRepository.getUserBasePicture(email);
+    }
 }

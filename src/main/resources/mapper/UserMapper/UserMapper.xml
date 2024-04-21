@@ -47,4 +47,11 @@
         FROM user_details u
         where email = #{email};
     </select>
+
+    <select id="getUserBasePicture" resultType="string">
+        SELECT u.fileLocation
+        FROM user_details u
+        WHERE u.basePicture = 1
+          and u.email = #{email}
+    </select>
 </mapper>

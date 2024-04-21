@@ -64,9 +64,9 @@
 
     <springProfile name="local,dev">
         <appender name="accessLogFileAppender4Dev" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>${LOG_PATH}/hhi-dev-access.log</file>
+            <file>${LOG_PATH}/BACKGOM-dev-access.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>${LOG_PATH}/hhi-dev-access.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <fileNamePattern>${LOG_PATH}/BACKGOM-dev-access.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
                 <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                     <maxFileSize>100MB</maxFileSize>
                 </timeBasedFileNamingAndTriggeringPolicy>
@@ -104,9 +104,9 @@
 
     <springProfile name="test,prod">
         <appender name="accessLogFileAppender4TestAndProd" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>${LOG_PATH}/hhi-access.log</file>
+            <file>${LOG_PATH}/BACKGOM-access.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>${LOG_PATH}/hhi-access.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <fileNamePattern>${LOG_PATH}/BACKGOM-access.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
                 <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                     <maxFileSize>100MB</maxFileSize>
                 </timeBasedFileNamingAndTriggeringPolicy>
@@ -144,9 +144,9 @@
     </springProfile>
 
     <appender name="errorLogFileAppender4All" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/hhi-error.log</file>
+        <file>${LOG_PATH}/BACKGOM-error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/hhi-error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/BACKGOM-error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>

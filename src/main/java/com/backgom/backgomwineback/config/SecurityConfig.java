@@ -39,7 +39,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //  초기화 단계에서 HttpSecurity 객체가 실제 설정한 필터를 생성
         http
                 .csrf(csrf -> {
-                    csrf.ignoringRequestMatchers("/auth/**");
+                    csrf.ignoringRequestMatchers("/api/auth/**");
+                    csrf.ignoringRequestMatchers("/api/auth/*/**");
+                    csrf.ignoringRequestMatchers("/api/*");
                     csrf.disable();
                 })
 
@@ -52,10 +54,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth
                             .requestMatchers(
-                                    "/auth/signup",
-                                    "/auth/signin",
-                                    "/auth/uploadUserPicture",
-                                    "/WineCommunity/myClubList")
+                                    "/api/auth/signup",
+                                    "/api/auth/signin",
+                                    "/api/auth/uploadUserPicture",
+                                    "/api/auth/getUserBasePicture",
+                                    "/api/WineCommunity/myClubList")
                             .permitAll()
                             .anyRequest()
                             .authenticated()
