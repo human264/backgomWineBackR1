@@ -10,9 +10,14 @@
     ]]></insert>
 
     <insert id="savePicturesInUserDetail" parameterType="java.lang.String"><![CDATA[
-        INSERT INTO user_detail (email, fileLocation)
+        INSERT INTO user_pictures (email, fileLocation)
         VALUES (#{email}, #{targetLocationPath})
     ]]></insert>
+
+    <insert id="saveUserInfo">
+        INSERT INTO user_entity ("email", "password", "phone_number")
+        VALUES ( #{dto.email}, #{dto.password}, #{dto.phoneNumber} )
+    </insert>
 
     <select id="findByEmail" parameterType="java.lang.String" resultType="Users">
         SELECT id, auth_provider, email, password, phone_number, role
@@ -44,13 +49,13 @@
 
     <select id="getUserPictures" resultType="java.lang.String">
         SELECT u.fileLocation
-        FROM user_details u
+        FROM user_pictures u
         where email = #{email};
     </select>
 
     <select id="getUserBasePicture" resultType="string">
         SELECT u.fileLocation
-        FROM user_details u
+        FROM user_pictures u
         WHERE u.basePicture = 1
           and u.email = #{email}
     </select>

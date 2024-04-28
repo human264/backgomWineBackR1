@@ -2,6 +2,7 @@ package com.backgom.backgomwineback.repository;
 
 
 import com.backgom.backgomwineback.domain.User.UserEntity;
+import com.backgom.backgomwineback.dto.JoinInDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,4 +26,6 @@ public interface UserRepository {
     List<String> getUserPictures(String email);
 
     String getUserBasePicture(String email);
+
+    void saveUserInfo(@Param("dto") JoinInDto joinInDto);
 }

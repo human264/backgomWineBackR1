@@ -30,7 +30,13 @@ public class WineCommunityService {
 
 
     public List<JoinedClubListDto> getTheJoinedClubList(String email) {
+
+
         List<Long> joinedClubID = joinedClubListRepository.getTheJoinedClubID(email);
+
+        if (joinedClubID.isEmpty()) {
+            return new ArrayList<>();
+        }
 
         List<ClubList> clubLists = clubListRepository.getClubListByClubId(joinedClubID);
 

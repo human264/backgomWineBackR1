@@ -58,7 +58,8 @@ public class SecurityConfig {
                                     "/api/auth/getUserBasePicture",
                                     "/api/auth/joinInWithOutPhoto",
                                     "/api/auth/joinIn",
-                                    "/api/auth/uploadImageUrls"
+                                    "/api/auth/uploadImageUrls",
+                                    "/api/auth/uploadUserPicture"
 
 //                                    "/api/WineCommunity/myClubList"
                             )

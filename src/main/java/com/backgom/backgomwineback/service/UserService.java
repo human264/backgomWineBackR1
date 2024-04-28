@@ -3,6 +3,7 @@ package com.backgom.backgomwineback.service;
 import com.backgom.backgomwineback.config.TokenProvider;
 import com.backgom.backgomwineback.domain.User.RefreshToken;
 import com.backgom.backgomwineback.domain.User.UserEntity;
+import com.backgom.backgomwineback.dto.JoinInDto;
 import com.backgom.backgomwineback.dto.LogInUser;
 import com.backgom.backgomwineback.dto.TokenDto;
 import com.backgom.backgomwineback.dto.UserDto;
@@ -125,7 +126,6 @@ public class UserService implements UserDetailsService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
         String formattedDate = now.format(formatter);
 
-
         Path rootLocation = Paths.get(imagePath);
         Path dateDirectory = rootLocation.resolve(formattedDate);
 
@@ -136,7 +136,7 @@ public class UserService implements UserDetailsService {
         }
 
         for (MultipartFile file : files) {
-            String fileExtension = getFileExtension(file.getOriginalFilename());
+            String fileExtension = getFileExtension(Objects.requireNonNull(file.getOriginalFilename()));
             String filename = UUID.randomUUID().toString() + fileExtension;
             try {
                 Path targetLocation = dateDirectory.resolve(filename);
@@ -184,4 +184,61 @@ public class UserService implements UserDetailsService {
     public String getUserBasePicture(String email) {
         return userRepository.getUserBasePicture(email);
     }
+
+    public void register(JoinInDto joinInDto) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+        String formattedDate = now.format(formatter);
+
+        Path rootLocation = Paths.get(imagePath);
+        Path dateDirectory = rootLocation.resolve(formattedDate);
+
+        try {
+            Files.createDirectories(dateDirectory);  // 폴더 생성
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create directory");
+        }
+
+        for (MultipartFile file : joinInDto.getFiles()) {
+            String fileExtension = getFileExtension(Objects.requireNonNull(file.getOriginalFilename()));
+            String filename = UUID.randomUUID() + fileExtension;
+
+            try {
+                Path targetLocation = dateDirectory.resolve(filename);
+                file.transferTo(targetLocation);  // 파일 저장
+
+                log.info("Saved file: {}", targetLocation);
+
+                if(isUserExist(joinInDto.getEmail())) {
+                    throw new RuntimeException("중복된 Email이 존재합니다.");
+                }
+
+                UUID uuid = UUID.randomUUID();
+                UserEntity user = UserEntity.builder()
+                        .id(uuid)
+                        .email(joinInDto.getEmail())
+                        .password(joinInDto.getPassword())
+                        .phoneNumber(joinInDto.getPhoneNumber())
+                        .build();
+
+                userRepository.save(user);
+                userRepository.savePicturesInUserDetail(joinInDto.getEmail(), targetLocation.toString());
+
+            } catch (IOException e) {
+                log.error("Failed to store file: {}", filename, e);
+                throw new RuntimeException("Failed to store file " + filename, e);
+            }
+        }
+    }
+
+    public boolean isUserExist(String email) {
+
+
+
+
+
+        return userRepository.existsByEmail(email);
+    }
+
+
 }

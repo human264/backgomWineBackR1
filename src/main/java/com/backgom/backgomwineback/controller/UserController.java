@@ -83,11 +83,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/uploadUserPicture")
-    public void registerPictures(@RequestParam("file") MultipartFile[] files,
-                                 @RequestParam("email") String email) {
-        userService.registerPictures(files, email);
-    }
+
 
     @GetMapping("/getUserBasePicture")
     public ResponseEntity<Resource> getTheUseBasePicture(Authentication authentication) {
@@ -114,25 +110,6 @@ public class UserController {
         }
     }
 
-    @PostMapping("/joinInWithOutPhoto")
-    public ResponseEntity<?> postJoinInExceptPicture(@RequestBody JoinInDto joinInDto
-    ) {
-        System.out.println("Received data: " + joinInDto.toString());
-        // 파일과 데이터 처리 로직
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/joinIn")
-    public ResponseEntity<?> postJoinInExceptPicture1(
-            @RequestParam("files") MultipartFile[] files) {
-        System.out.println(files.length);
-        for (MultipartFile file : files) {
-            System.out.println(file.getName());
-            System.out.println(file.getOriginalFilename());
-        }
-
-        return ResponseEntity.ok().build();
-    }
 
     @PostMapping("/uploadImageUrls")
     public ResponseEntity<?> postUploadImageUrls(
@@ -143,6 +120,12 @@ public class UserController {
             System.out.println(files[i].getOriginalFilename());
         }
         System.out.println(email);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/joinIn")
+    public ResponseEntity<?> registerPictures(@ModelAttribute JoinInDto joinInDto) {
+        userService.register(joinInDto);
         return ResponseEntity.ok().build();
     }
 
