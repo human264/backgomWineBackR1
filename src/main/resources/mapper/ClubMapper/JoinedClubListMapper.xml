@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.backgom.backgomwineback.repository.JoinedClubListRepository">
+<mapper namespace="com.backgom.backgomwineback.repository.club.JoinedClubListRepository">
 
     <resultMap id="BaseResultMap" type="Joinedclublist">
             <id property="id" column="id" jdbcType="BIGINT"/>
@@ -14,6 +14,22 @@
             <result property="updated_at" column="updated_at" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <insert id="joinInTheClub">
+        INSERT INTO JoinedClubList (email, clubName, joinedClubId, accessbility, role)
+        SELECT #{email}      as email,
+               c.clubSubject as clubName,
+               c.id          as joinedClubId,
+               0             as accessbility,
+               ''            as role
+        FROM clubList c
+        WHERE c.id NOT IN (SELECT DISTINCT j.joinedClubId
+                           FROM clubList c
+                              , JoinedClubList j
+                           WHERE c.id = j.joinedClubId
+                             and j.email = #{email})
+          and c.id = #{clubId}
+    </insert>
+
 
     <select id="getTheJoinedClubList" resultType="JoinedClubList">
         SELECT * FROM JoinedClubList j WHERE j.email = #{email}
@@ -22,6 +38,13 @@
 
     <select id="getTheJoinedClubID" resultType="java.lang.Long">
         SELECT j.joinedClubId FROM JoinedClubList j WHERE j.email = #{email}
+    </select>
+
+    <select id="getTheJoinedWineMeeting"
+            resultType="com.backgom.backgomwineback.domain.Club.JoinedWineMeeting">
+        SELECT *
+        FROM meetingTable m
+                 RIGHT JOIN JoinedMeetingTable j ON m.uuid = j.meetingUuid and j.email = #{email}
     </select>
 
 

@@ -29,9 +29,8 @@ class WineCommunityServiceTest {
     public void clubCreateTest() {
         wineCommunityService.createClub(
                 ClubListDto.builder()
-                        .clubSubject("club이름")
+                        .clubSubject("club 이름 7")
                         .createUser("human264@gmail.com")
-
                         .build());
     }
 

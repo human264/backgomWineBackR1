@@ -27,8 +27,11 @@
     <select id="existsByEmail" parameterType="java.lang.String" resultType="java.lang.Boolean">
         SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
         FROM user_entity
-        WHERE email = #{email}
+        <where>
+            AND email = #{email}
+        </where>
     </select>
+
     <select id="findByEmailAndPassword" parameterType="map" resultType="Users">
         SELECT *
         FROM user_entity

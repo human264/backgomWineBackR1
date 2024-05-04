@@ -16,6 +16,7 @@ import java.util.Date;
 public class ClubListDto {
     private Long id;
     private String clubSubject;
+    private String clubUrl;
     private Integer memberNo;
     private Boolean jungmo;
     private Boolean bungae;
@@ -31,6 +32,7 @@ public class ClubListDto {
         return ClubListDto.builder()
                 .id(clubList.getId())
                 .clubSubject(clubList.getClubsubject())
+                .clubUrl(clubList.getClubUrl())
                 .memberNo(clubList.getMemberno())
                 .jungmo(getBoolToJungmo(clubList.getJungmo()))
                 .bungae(getBoolToBungae(clubList.getBungae()))

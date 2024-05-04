@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -105,4 +106,13 @@ class UserServiceTest {
     }
 
 
+    @Test
+    void maketheUUID() {
+        UUID uuid = UUID.randomUUID();
+
+        String uuidString = uuid.toString();
+
+        System.out.println(uuidString);
+
+    }
 }

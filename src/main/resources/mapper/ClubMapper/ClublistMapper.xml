@@ -2,11 +2,31 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.backgom.backgomwineback.repository.ClubListRepository">
+<mapper namespace="com.backgom.backgomwineback.repository.club.ClubListRepository">
+
     <insert id="createClub">
-
-
+        INSERT INTO clubList (clubSubject,
+                              clubUrl,
+                              memberNo,
+                              jungmo,
+                              bungae,
+                              location,
+                              point,
+                              createUser,
+                              operationTeam,
+                              clubImagePath)
+        VALUES (#{dto.clubSubject},
+                REPLACE(#{dto.clubSubject}, ' ', ''),
+                0,
+                0,
+                0,
+                #{dto.location},
+                0.0,
+                #{dto.createUser},
+                #{dto.operationTeam},
+                #{dto.clubImagePath})
     </insert>
+
 
     <select id="getClubListByClubId" parameterType="java.util.List" resultType="ClubList">
         SELECT * FROM clubList c
@@ -19,37 +39,58 @@
     </select>
 
     <select id="getClubLists" resultType="ClubList">
-        SELECT * FROM clubList
-        <where>
-            <if test="id != null and id != ''">
-                id = #{dto.id}
-            </if>
-            <if test="clubSubject != null and clubSubject != ''">
-                clubSubject = #{dto.clubSubject}
-            </if>
-            <if test="clubSubject != null and clubSubject != ''">
-                clubSubject = #{dto.bungae}
-            </if>
-            <if test="clubSubject != null and clubSubject != ''">
-                clubSubject = #{dto.jungmo}
-            </if>
-            <if test="clubSubject != null and clubSubject != ''">
-                clubSubject = #{dto.clubSubject}
-            </if>
-            <if test="clubSubject != null and clubSubject != ''">
-                clubSubject = #{dto.clubSubject}
-            </if>
-            <if test="clubSubject != null and clubSubject != ''">
-                clubSubject = #{dto.clubSubject}
-            </if>
-            <if test="clubSubject != null and clubSubject != ''">
-                clubSubject = #{dto.clubSubject}
-            </if>
-            <if test="clubSubject != null and clubSubject != ''">
-                clubSubject = #{dto.clubSubject}
-            </if>
-        </where>
+        SELECT * FROM clubList c
+        WHERE 1=1
+        <if test="dto.id != null and dto.id != ''">
+            AND c.id = #{dto.id}
+        </if>
+        <if test="clubSubject != null and clubSubject != ''">
+            AND c.clubSubject = #{dto.clubSubject}
+        </if>
+        <if test="clubUrl != null and clubUrl != ''">
+            AND c.clubUrl = #{dto.clubUrl}
+        </if>
+        <if test="memberNo != null and memberNo != ''">
+            AND c.memberNo = #{dto.memberNo}
+        </if>
+        <if test="joungmo != null and joungmo != ''">
+            AND c.jungmo = #{dto.jungmo}
+        </if>
+        <if test="bungae != null and bungae != ''">
+            AND c.bungae = #{dto.bungae}
+        </if>
+        <if test="location != null and location != ''">
+            AND c.location = #{dto.location}
+        </if>
+        <if test="point != null and point != ''">
+            AND c.point = #{dto.point}
+        </if>
+        <if test="createUser != null and createUser != ''">
+            AND c.createUser = #{dto.createUser}
+        </if>
+        <if test="operationTeam != null and operationTeam != ''">
+            AND c.operationTeam = #{dto.operationTeam}
+        </if>
+
     </select>
+
+
+    <select id="findTheClubListForJoin" resultType="ClubList">
+        SELECT *
+        FROM clubList c
+        WHERE c.id NOT IN (SELECT DISTINCT j.joinedClubId
+                           FROM clubList c,
+                                JoinedClubList j
+                           WHERE c.id = j.joinedClubId
+                             and j.email = #{email})
+    </select>
+
+    <select id="isTheClubNameExists" resultType="java.lang.Boolean">
+        select CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+        from clubList c
+        where c.clubUrl = REPLACE(#{clubName}, ' ', '')
+    </select>
+
 
 
 </mapper>

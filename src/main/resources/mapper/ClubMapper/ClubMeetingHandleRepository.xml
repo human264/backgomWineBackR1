@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backgom.backgomwineback.repository.club.ClubMeetingHandleRepository">
+
+    <insert id="createTheWineMeeting" parameterType="com.backgom.backgomwineback.domain.Club.MeetingTable">
+        INSERT INTO meetingTable (uuid, subject, detail, winenameUUid, meetingDate,
+                                  meetingTimeStart, meetingTimeEnd,
+                                  location,
+                                  locatedPoint, jointedCost,
+                                  joinCount, totalJoinCount, createEmail, createdClub)
+        VALUES (#{dto.uuid},
+                #{dto.subject},
+                #{dto.detail},
+                #{dto.winenameUuid},
+                #{dto.meetingDate},
+                #{dto.meetingTimeStart},
+                #{dto.meetingTimeEnd},
+                #{dto.location},
+                ST_GeomFromText(#{dto.locatedPoint}),
+                #{dto.jointedCost},
+                #{dto.joinCount},
+                #{dto.totalJoinCount},
+                #{dto.createEmail},
+                #{dto.createdClub})
+    </insert>
+
+    <insert id="insertTheCLubMeeting" parameterType="com.backgom.backgomwineback.dto.club.wineMeetingJoinDto.MeetingJoinTableDto">
+        INSERT INTO JoinedMeetingTable (uuid, email, meetingUuid)
+        VALUES (#{dto.uuid}, #{dto.email}, #{dto.meetingUuid})
+    </insert>
+
+    <select id="isTheJoinedMeetingExists" resultType="java.lang.Boolean">
+        SELECT case when count(*) > 0 then true else false end
+        FROM JoinedMeetingTable j
+        WHERE j.email = #{email} and j.meetingUuid = #{meetingUUid}
+    </select>
+
+    <select id="wineTotalList" resultType="java.lang.String">
+        SELECT distinct m.wineName FROM wineList m;
+    </select>
+    <select id="getUUIDFromWine" resultType="java.lang.String">
+        SELECT m.wineUUID FROM wineList m WHERE m.wineName = #{wineName}
+    </select>
+
+    <select id="saveTheMeetingWine" resultType="java.lang.Integer">
+        INSERT INTO meetingTableWine (wineUUID, wineName, meetingUUID)
+        VALUES (#{dto.wineUUID}, #{dto.wineName}, #{dto.meetingUUID});
+    </select>
+
+    <select id="isTheMeetingExistsByWineClub" resultType="java.lang.Boolean">
+        SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END FROM meetingTable m
+        WHERE m.createdClub = #{clubName} and m.subject = #{subject}
+    </select>
+
+    <select id="getTheWineMeetingList" resultType="com.backgom.backgomwineback.domain.Club.MeetingTable">
+        SELECT * FROM meetingTable m WHERE m.createdClub = #{clubName} ORDER BY m.created_at desc
+    </select>
+
+    <select id="getThePickedWineByClub" resultType="java.lang.String">
+        SELECT m.wineName
+        FROM meetingTableWine m
+        WHERE m.meetingUUID = #{winenameUuid}
+    </select>
+
+
+
+</mapper>

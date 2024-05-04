@@ -20,6 +20,8 @@ public class ClubList implements Serializable {
 
     private String clubsubject;
 
+    private String clubUrl;
+
     private Integer memberno;
 
     private Integer jungmo;
@@ -33,6 +35,8 @@ public class ClubList implements Serializable {
     private String createuser;
 
     private String operationteam;
+
+    private String clubImagePath;
 
     private Date createdate;
 
@@ -74,5 +78,6 @@ public class ClubList implements Serializable {
     private static Integer getBoolToJungmo(Boolean jungmo) {
         return jungmo ? 1 : 0;
     }
+
 
 }

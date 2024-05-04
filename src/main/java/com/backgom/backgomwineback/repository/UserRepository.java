@@ -13,7 +13,7 @@ import java.util.UUID;
 @Mapper
 public interface UserRepository {
     UserEntity findByEmail(String email);
-    Boolean existsByEmail(String email);
+    Boolean existsByEmail(@Param("email") String email);
     UserEntity findByEmailAndPassword(String email, String password);
     int save(@Param("param") UserEntity userEntity);
     Optional<UserEntity> findById( UUID userId);

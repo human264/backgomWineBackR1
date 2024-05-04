@@ -11,9 +11,12 @@ import java.time.LocalDateTime;
 public class JoinedClubListDto {
     private Long id;
     private String clubSubject;
+    private String clubUrl;
     private int clubMemberNo;
+    private String location;
     private boolean isTheJungMoExists;
     private boolean isTheBunGaeExists;
-    private String location;
+    private Double point;
+    private String clubImagePath;
 
 }

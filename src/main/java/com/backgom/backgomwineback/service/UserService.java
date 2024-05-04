@@ -209,10 +209,6 @@ public class UserService implements UserDetailsService {
 
                 log.info("Saved file: {}", targetLocation);
 
-                if(isUserExist(joinInDto.getEmail())) {
-                    throw new RuntimeException("중복된 Email이 존재합니다.");
-                }
-
                 UUID uuid = UUID.randomUUID();
                 UserEntity user = UserEntity.builder()
                         .id(uuid)
@@ -221,7 +217,6 @@ public class UserService implements UserDetailsService {
                         .phoneNumber(joinInDto.getPhoneNumber())
                         .build();
 
-                userRepository.save(user);
                 userRepository.savePicturesInUserDetail(joinInDto.getEmail(), targetLocation.toString());
 
             } catch (IOException e) {
@@ -231,14 +226,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public boolean isUserExist(String email) {
 
-
-
-
-
-        return userRepository.existsByEmail(email);
-    }
 
 
 }

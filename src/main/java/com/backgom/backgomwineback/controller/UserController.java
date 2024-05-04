@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -82,7 +81,6 @@ public class UserController {
                     .badRequest().body(responseDTO);
         }
     }
-
 
 
     @GetMapping("/getUserBasePicture")
